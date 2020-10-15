@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setCategory, setSortBy } from '../redux/actions/filters';
 import { fetchPizzas } from '../redux/actions/pizzas';
 import { addPizzaToCart } from '../redux/actions/cart';
-//import PizzaLoadingBlock from '../components/PizzaLoadingBlock';
+import PizzaLoadingBlock from '../components/PizzaLoadingBlock';
 
 const itemsCategories = ['Meat', 'Vegetarian', 'Grill', 'Spicy', 'Closed'];
 const itemsSortPopup = [
@@ -51,20 +51,18 @@ function Home() {
       </div>
       <h2 className="content__title">All pizzas</h2>
       <div className="content__items">
-        {
-          isLoaded
-            ? items.map((obj) => (
-                <PizzaBlock
-                  key={obj.id}
-                  onClickAddPizza={handlePizzaToCart}
-                  addedCount={cartItems[obj.id] && cartItems[obj.id].length}
-                  {...obj}
-                />
-              ))
-            : 'Loading' /*Array(1)
+        {isLoaded
+          ? items.map((obj) => (
+              <PizzaBlock
+                key={obj.id}
+                onClickAddPizza={handlePizzaToCart}
+                addedCount={cartItems[obj.id] && cartItems[obj.id].length}
+                {...obj}
+              />
+            ))
+          : Array(1)
               .fill(0)
-        .map((_, index) => <PizzaLoadingBlock key={index} />)*/
-        }
+              .map((_, index) => <PizzaLoadingBlock key={index} />)}
       </div>
     </div>
   );
